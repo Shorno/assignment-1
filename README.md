@@ -97,18 +97,4 @@ function throwError(message: string): never {
 }
 ```
 
-Its killer application is in exhaustiveness checking:
 
-```typescript
-type Shape = Circle | Square;
-
-function getArea(shape: Shape) {
-    if ("radius" in shape) return Math.PI * shape.radius ** 2;
-    if ("width" in shape) return shape.width ** 2;
-    
-    // This line will error if we add a new shape type and forget to handle it
-    const _exhaustiveCheck: never = shape;
-}
-```
-
-After working with TypeScript for a while, most developers find themselves using `unknown` way more than `any`, and leveraging `never` to make sure they don't miss edge cases. Your future self (and teammates) will thank you!
